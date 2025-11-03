@@ -1,5 +1,11 @@
+import TanstackRouterProvider from "./Router/TanstackRouterProvider";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <TanstackRouterProvider />
+    </div>
+  );
 };
 
 export default App;
