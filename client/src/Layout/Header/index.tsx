@@ -2,7 +2,7 @@ import { BriefcaseBusiness, ChevronDown, Lock } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 bg-white z-999 container mx-auto max-w-[1130px] px-6 py-6">
+    <header className="container mx-auto max-w-[1130px] px-6 py-6">
       <nav className="grid grid-cols-12 items-center   justify-between ">
         <div className="col-span-3">
           <div className="flex items-center">
