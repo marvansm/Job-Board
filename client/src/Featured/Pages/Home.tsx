@@ -1,5 +1,11 @@
+import HomeTemp from "../Templates/HomeTemp";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <HomeTemp />
+    </div>
+  );
 };
 
 export default Home;
