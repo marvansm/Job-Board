@@ -4,25 +4,16 @@ export type children = {
   children: ReactNode;
 };
 
-export type headingTypes = {
-  title?: string;
-  desc?: string;
-};
-export type CategoryCardProps = {
-  title?: string;
-  image: string;
+export type CompaniesCardProps = {
+  logo: string;
+  name: string;
 };
 
-export type ArticlesCardsProps = {
-  image: string;
-  category: string;
-  date: string;
+export type vacanciesCardProps = {
+  logo: string;
+  company: string;
   title: string;
-};
-export type productCardProps = {
-  image: string;
-  title: string;
-  price: number;
-  discount: number;
-  rating: number;
+  location: string;
+  level: string;
+  department: string;
 };

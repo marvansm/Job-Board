@@ -1,6 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import ApiServices from "../../../Services/http";
 import CompaniesCard from "../../Common/CompaniesCard";
+import { queryKeys } from "../../../Constants/queryKeys";
 
 const CompaniesSection = () => {
+  const api = new ApiServices("http://localhost:1337/api/");
+  const { data } = useQuery({
+    queryKey: [queryKeys.company],
+    queryFn: () => api.getData("companies?populate=*"),
+  });
+
   return (
     <div className="bg-[#faf9fc] py-[100px]">
       <div className="container max-w-[1130px] px-6 mx-auto">
@@ -20,14 +29,13 @@ const CompaniesSection = () => {
           </button>
         </div>
         <div className="grid grid-cols-4 gap-6">
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
-          <CompaniesCard />
+          {data?.data?.map((item: any) => (
+            <CompaniesCard
+              key={item?.id}
+              logo={`http://localhost:1337${item?.logo?.url}`}
+              name={item?.name}
+            />
+          ))}
         </div>
         <div className="grid grid-cols-2 gap-8 pt-[100px] pb-2.5">
           <div className="border border-[#514fc0] p-12 bg-[#514fc0] rounded-md ">
