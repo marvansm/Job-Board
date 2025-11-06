@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ApiServices from "../../../Services/http";
-import CompaniesCard from "../../Common/CompaniesCard";
+import CompaniesCard from "../../Components/CompaniesCard";
 import { queryKeys } from "../../../Constants/queryKeys";
 
 const CompaniesSection = () => {

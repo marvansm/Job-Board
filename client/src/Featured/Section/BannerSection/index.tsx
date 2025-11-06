@@ -4,8 +4,27 @@ import {
   ChevronDown,
   MapPin,
 } from "lucide-react";
+import ApiServices from "../../../Services/http";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../../../Constants/queryKeys";
 
 const BannerSection = () => {
+  const api = new ApiServices("http://localhost:1337/api/");
+  const { data: locations } = useQuery({
+    queryKey: [queryKeys.location],
+    queryFn: () => api.getData("locations?populate=*"),
+  });
+
+  const { data: levels } = useQuery({
+    queryKey: [queryKeys.level],
+    queryFn: () => api.getData("levels?populate=*"),
+  });
+
+  const { data: departments } = useQuery({
+    queryKey: [queryKeys.department],
+    queryFn: () => api.getData("departments?populate=*"),
+  });
+
   return (
     <section className="relative">
       <img
@@ -102,15 +121,14 @@ const BannerSection = () => {
                 </div>
 
                 <ul className="absolute left-0 top-[42px] w-[202px] text-[16px] font-medium bg-white border border-gray-200 rounded-lg shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-30">
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Junior
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Mid
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Senior
-                  </li>
+                  {locations?.data?.map((item: any) => (
+                    <li
+                      key={item?.id}
+                      className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {item?.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -124,15 +142,14 @@ const BannerSection = () => {
                   />
                 </div>
                 <ul className="absolute left-0 top-[42px] w-[202px] font-medium text-[16px] bg-white border border-gray-200 rounded-lg shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-30">
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Junior
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Mid
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Senior
-                  </li>
+                  {levels?.data?.map((item: any) => (
+                    <li
+                      key={item?.id}
+                      className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {item?.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -146,15 +163,14 @@ const BannerSection = () => {
                   />
                 </div>
                 <ul className="absolute left-0 top-[42px] font-medium w-[202px] text-[16px] bg-white border border-gray-200 rounded-lg shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-30">
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Design
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Engineering
-                  </li>
-                  <li className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer">
-                    Product
-                  </li>
+                  {departments?.data?.map((item: any) => (
+                    <li
+                      key={item?.id}
+                      className="px-3 py-3  text-gray-600 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {item?.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

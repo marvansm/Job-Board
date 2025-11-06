@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../../Constants/queryKeys";
 import ApiServices from "../../../Services/http";
-import VacanciesCard from "../../Common/VacanciesCard";
+import VacanciesCard from "../../Components/VacanciesCard";
 
 const FeaturedVacanciesSection = () => {
   const api = new ApiServices("http://localhost:1337/api/");

@@ -1,18 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import ApiServices from "../../../Services/http";
-import VacanciesCard from "../../Common/VacanciesCard";
+import VacanciesCard from "../../Components/VacanciesCard";
 import { queryKeys } from "../../../Constants/queryKeys";
+import { useState } from "react";
 
 const LatestVacanciesSection = () => {
   const api = new ApiServices("http://localhost:1337/api/");
+  const [page, setPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: [queryKeys.LatesVacancy],
+    queryKey: [queryKeys.LatesVacancy, page],
     queryFn: () =>
       api.getData(
-        "vacancies?populate[companies][populate]=logo&populate[locations]=true&populate[level]=true&populate[department]=true"
+        `vacancies?populate[companies][populate]=logo&populate[locations]=true&populate[level]=true&populate[department]=true&sort[0]=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=6`
       ),
+    placeholderData: (prev) => prev,
   });
+  const totalPages = data?.meta?.pagination?.pageCount || 1;
+
   return (
     <div className="container max-w-[1130px] px-6 mx-auto mt-[81px] pb-[100px]">
       <div className=" flex items-center justify-center flex-col ">
@@ -32,11 +37,24 @@ const LatestVacanciesSection = () => {
             />
           ))}
         </div>
-        <div className="mt-9 flex items-center gap-[30px]">
-          <span className="text-[16px] text-[#484b62] font-normal leading-[26px]">
-            1 / 2
+        <div className="flex items-center gap-[30px] mt-8">
+          <button
+            onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={page === 1}
+            className="py-2 px-3 border rounded-sm text-sm bg-white border-[#376fff] text-[#376fff] disabled:hidden"
+          >
+            Previous
+          </button>
+
+          <span className="text-[#484b62] text-[16px]">
+            {page} / {totalPages}
           </span>
-          <button className="rounded-sm py-2 px-3 text-[14px] leading-[17.99px] border border-[#376fff] bg-[#376fff] text-white font-semibold">
+
+          <button
+            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+            disabled={page === totalPages}
+            className="py-2 px-3 border rounded-sm text-sm bg-[#376fff] text-white disabled:opacity-50"
+          >
             Next
           </button>
         </div>
