@@ -24,6 +24,7 @@ const FeaturedVacanciesSection = () => {
           {data?.data?.map((item: any) => (
             <VacanciesCard
               key={item?.id}
+              id={item?.id}
               logo={`http://localhost:1337${item?.companies[0]?.logo?.url}`}
               title={item?.name}
               company={item?.companies[0]?.name}

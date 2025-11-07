@@ -1,4 +1,3 @@
-import { useParams } from "@tanstack/react-router";
 import {
   Briefcase,
   BriefcaseBusiness,
@@ -7,11 +6,8 @@ import {
   Clock,
   MapPin,
 } from "lucide-react";
-import ApiServices from "../../../Services/http";
 
 const DetailSection = () => {
-  const { id } = useParams({ from: "/vacancy/$id" });
-  const api = new ApiServices("http://localhost:1337/api/");
   return (
     <section className="bg-[#f9f9fc] py-10  ">
       <div className=" mx-auto container  max-w-[1130px] px-6 py-6 grid grid-cols-12 gap-6 ">

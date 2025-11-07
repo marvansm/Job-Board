@@ -10,6 +10,7 @@ export type CompaniesCardProps = {
 };
 
 export type vacanciesCardProps = {
+  id: string | number;
   logo: string;
   company: string;
   title: string;
