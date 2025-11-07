@@ -10,11 +10,17 @@ const HomeTemp = () => {
     level: "",
     department: "",
   });
+  const [search, setSearch] = useState("");
   return (
     <div>
-      <BannerSection filters={filters} setFilters={setFilters} />
-      <LatestVacanciesSection filters={filters} />
+      <BannerSection
+        search={search}
+        setSearch={setSearch}
+        filters={filters}
+        setFilters={setFilters}
+      />
       <FeaturedVacanciesSection />
+      <LatestVacanciesSection filters={filters} search={search} />
       <CompaniesSection />
     </div>
   );

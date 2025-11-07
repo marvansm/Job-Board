@@ -4,23 +4,27 @@ import VacanciesCard from "../../Components/VacanciesCard";
 import { queryKeys } from "../../../Constants/queryKeys";
 import { useState } from "react";
 
-const LatestVacanciesSection = ({ filters }: any) => {
+const LatestVacanciesSection = ({ filters, search }: any) => {
   const api = new ApiServices("http://localhost:1337/api/");
   const [page, setPage] = useState(1);
 
   const buildFilters = () => {
     const params = [];
+
     if (filters.location)
       params.push(`filters[locations][name][$eq]=${filters.location}`);
     if (filters.level)
       params.push(`filters[level][name][$eq]=${filters.level}`);
     if (filters.department)
       params.push(`filters[department][name][$eq]=${filters.department}`);
+
+    if (search) params.push(`filters[name][$containsi]=${search}`);
+
     return params.join("&");
   };
 
   const { data } = useQuery({
-    queryKey: [queryKeys.LatesVacancy, page, filters],
+    queryKey: [queryKeys.LatesVacancy, page, filters, search],
     queryFn: () =>
       api.getData(
         `vacancies?populate[companies][populate]=logo&populate[locations]=true&populate[level]=true&populate[department]=true&pagination[page]=${page}&pagination[pageSize]=6&${buildFilters()}`
@@ -40,7 +44,6 @@ const LatestVacanciesSection = ({ filters }: any) => {
           {data?.data?.map((item: any) => (
             <VacanciesCard
               key={item?.id}
-              id={item?.id}
               logo={`http://localhost:1337${item?.companies[0]?.logo?.url}`}
               title={item?.name}
               company={item?.companies[0]?.name}

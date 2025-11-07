@@ -9,9 +9,11 @@ import ApiServices from "../../../Services/http";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../../Constants/queryKeys";
 
-const BannerSection = ({ filters, setFilters }: any) => {
+const BannerSection = ({ filters, setFilters, search, setSearch }: any) => {
   const api = new ApiServices("http://localhost:1337/api/");
-
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
   const { data: locations } = useQuery({
     queryKey: [queryKeys.location],
     queryFn: () => api.getData("locations?populate=*"),
@@ -86,10 +88,15 @@ const BannerSection = ({ filters, setFilters }: any) => {
 
       <div className="flex justify-center transform translate-y-[-50px] items-center h-[104px]">
         <div className="max-w-[1074px] z-20 w-full">
-          <form className="bg-white shadow-lg rounded-[5px] border border-gray-100 p-4 flex flex-wrap md:flex-nowrap items-center justify-between gap-3 h-[104px]">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white shadow-lg rounded-[5px] border border-gray-100 p-4 flex flex-wrap md:flex-nowrap items-center justify-between gap-3 h-[104px]"
+          >
             <div className="flex items-center gap-2 flex-1 max-w-[346px] h-[38px] border border-gray-200 rounded-lg px-1">
               <input
                 type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search for jobs"
                 className="flex-1 outline-none text-sm text-gray-600"
               />
