@@ -4,18 +4,30 @@ import VacanciesCard from "../../Components/VacanciesCard";
 import { queryKeys } from "../../../Constants/queryKeys";
 import { useState } from "react";
 
-const LatestVacanciesSection = () => {
+const LatestVacanciesSection = ({ filters }: any) => {
   const api = new ApiServices("http://localhost:1337/api/");
   const [page, setPage] = useState(1);
 
+  const buildFilters = () => {
+    const params = [];
+    if (filters.location)
+      params.push(`filters[locations][name][$eq]=${filters.location}`);
+    if (filters.level)
+      params.push(`filters[level][name][$eq]=${filters.level}`);
+    if (filters.department)
+      params.push(`filters[department][name][$eq]=${filters.department}`);
+    return params.join("&");
+  };
+
   const { data } = useQuery({
-    queryKey: [queryKeys.LatesVacancy, page],
+    queryKey: [queryKeys.LatesVacancy, page, filters],
     queryFn: () =>
       api.getData(
-        `vacancies?populate[companies][populate]=logo&populate[locations]=true&populate[level]=true&populate[department]=true&sort[0]=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=6`
+        `vacancies?populate[companies][populate]=logo&populate[locations]=true&populate[level]=true&populate[department]=true&pagination[page]=${page}&pagination[pageSize]=6&${buildFilters()}`
       ),
     placeholderData: (prev) => prev,
   });
+
   const totalPages = data?.meta?.pagination?.pageCount || 1;
 
   return (

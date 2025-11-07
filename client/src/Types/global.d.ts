@@ -17,3 +17,19 @@ export type vacanciesCardProps = {
   level: string;
   department: string;
 };
+
+export type BannerSectionProps = {
+  onFilterChange: (filters: {
+    search: string;
+    location: string;
+    level: string;
+    department: string;
+  }) => void;
+};
+
+export type filters = {
+  search: string;
+  location: string;
+  level: string;
+  department: string;
+};
