@@ -1,5 +1,5 @@
-import DetailSection from "../Section/DetailSection";
-import MoreSection from "../Section/MoreSection";
+import DetailSection from "../Section/Home/DetailSection";
+import MoreSection from "../Section/Home/MoreSection";
 
 const DetailTemp = () => {
   return (

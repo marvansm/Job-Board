@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import ApiServices from "../../../Services/http";
-import VacanciesCard from "../../Components/VacanciesCard";
-import { queryKeys } from "../../../Constants/queryKeys";
+import ApiServices from "../../../../Services/http";
+import VacanciesCard from "../../../Components/VacanciesCard";
+import { queryKeys } from "../../../../Constants/queryKeys";
 import { useState } from "react";
 
 const LatestVacanciesSection = ({ filters, search }: any) => {
@@ -43,6 +43,7 @@ const LatestVacanciesSection = ({ filters, search }: any) => {
           </h2>
           {data?.data?.map((item: any) => (
             <VacanciesCard
+              id={item?.id}
               key={item?.id}
               logo={`http://localhost:1337${item?.companies[0]?.logo?.url}`}
               title={item?.name}

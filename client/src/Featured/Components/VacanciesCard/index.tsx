@@ -5,8 +5,10 @@ import {
   MapPin,
 } from "lucide-react";
 import type { vacanciesCardProps } from "../../../Types/global";
+import { useNavigate } from "@tanstack/react-router";
 
 const VacanciesCard = ({
+  id,
   logo,
   company,
   title,
@@ -14,8 +16,16 @@ const VacanciesCard = ({
   level,
   department,
 }: vacanciesCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate({ to: `/vacancy/$id`, params: { id: String(id) } });
+  };
   return (
-    <div className="flex items-center gap-5 py-2 pl-2 pr-5 border border-[#376fff] rounded-md group w-[570px] transform hover:scale-[1.01] cursor-pointer duration-200">
+    <div
+      onClick={handleClick}
+      className="flex items-center gap-5 py-2 pl-2 pr-5 border border-[#376fff] rounded-md group w-[570px] transform hover:scale-[1.01] cursor-pointer duration-200"
+    >
       <div className="bg-[#F4F9FF] rounded-md min-w-[126px] max-w-[126px] max-h-[126px] min-h-[126px] px-2.5 flex items-center justify-center">
         <img
           src={logo}

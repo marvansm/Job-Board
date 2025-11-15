@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../../../Constants/queryKeys";
-import ApiServices from "../../../Services/http";
-import VacanciesCard from "../../Components/VacanciesCard";
+import { queryKeys } from "../../../../Constants/queryKeys";
+import ApiServices from "../../../../Services/http";
+import VacanciesCard from "../../../Components/VacanciesCard";
 
 const FeaturedVacanciesSection = () => {
   const api = new ApiServices("http://localhost:1337/api/");
@@ -24,6 +24,7 @@ const FeaturedVacanciesSection = () => {
           {data?.data?.map((item: any) => (
             <VacanciesCard
               key={item?.id}
+              id={item?.id}
               logo={`http://localhost:1337${item?.companies[0]?.logo?.url}`}
               title={item?.name}
               company={item?.companies[0]?.name}

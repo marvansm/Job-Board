@@ -1,6 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import { BriefcaseBusiness, ChevronDown, Lock } from "lucide-react";
+import { useAppliedVacancies } from "../../Context/AppliedVacanciesContext";
 
 const Header = () => {
+  const { appliedList } = useAppliedVacancies();
   return (
     <header className="container mx-auto max-w-[1130px] px-6 py-6">
       <nav className="grid grid-cols-12 items-center   justify-between ">
@@ -24,13 +27,22 @@ const Header = () => {
             </li>
             <li className="cursor-pointer">Blog</li>
             <li className="cursor-pointer">Contact</li>
-            <li className="cursor-pointer">Cart (0)</li>
+            <li className="cursor-pointer relative">
+              Applied ({appliedList.length})
+              {appliedList.length > 0 && (
+                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {appliedList.length}
+                </span>
+              )}
+            </li>
           </ul>
 
           <div className="flex items-end justify-end gap-4">
-            <button className="flex items-center gap-2 p-2 border border-[#E2E8F0] text-14px font-medium rounded-lg hover:scale-[1.05] transition-all duration-500 shadow-2xs bg-[#F8F8FA]">
-              <Lock size={14} /> Login
-            </button>
+            <Link to="/register">
+              <button className="flex items-center gap-2 p-2 border border-[#E2E8F0] text-14px font-medium rounded-lg hover:scale-[1.05] transition-all duration-500 shadow-2xs bg-[#F8F8FA]">
+                <Lock size={14} /> Login
+              </button>
+            </Link>
             <button className="flex items-center gap-2  p-2 text-[14px] font-medium bg-[#4767FF] border border-[#4767FF] rounded-lg hover:scale-[1.05] transition-all duration-500 shadow-2xs text-white">
               <BriefcaseBusiness size={14} /> Post a job
             </button>

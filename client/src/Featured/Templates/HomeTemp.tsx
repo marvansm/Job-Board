@@ -1,8 +1,8 @@
 import { useState } from "react";
-import BannerSection from "../Section/BannerSection";
-import CompaniesSection from "../Section/CompaniesSection";
-import FeaturedVacanciesSection from "../Section/FeaturedVacanciesSection/index";
-import LatestVacanciesSection from "../Section/LatestVacanciesSection";
+import BannerSection from "../Section/Home/BannerSection";
+import CompaniesSection from "../Section/Home/CompaniesSection";
+import FeaturedVacanciesSection from "../Section/Home/FeaturedVacanciesSection/index";
+import LatestVacanciesSection from "../Section/Home/LatestVacanciesSection";
 
 const HomeTemp = () => {
   const [filters, setFilters] = useState({

@@ -5,9 +5,9 @@ import {
   ChevronDown,
   MapPin,
 } from "lucide-react";
-import ApiServices from "../../../Services/http";
+import ApiServices from "../../../../Services/http";
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../../../Constants/queryKeys";
+import { queryKeys } from "../../../../Constants/queryKeys";
 
 const BannerSection = ({ filters, setFilters, search, setSearch }: any) => {
   const api = new ApiServices("http://localhost:1337/api/");
